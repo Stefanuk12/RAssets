@@ -145,6 +145,12 @@ namespace RAssets {
 
     // Verify if an audio can be uploaded
     export async function verifyAudio(cookie: string, data: IAudioVerifyRequest){
+        // Get CSRF
+        const xcsrf = await RAssets.getCSRF(cookie)
+        if (!xcsrf){
+            throw(new Error("Invalid cookie"))
+        }
+
         // Config
         const config = <IAudioVerifyRequest>{
             file: data.file,
@@ -159,6 +165,8 @@ namespace RAssets {
         const response = await HttpClient.post("audio/verify", {
             throwHttpErrors: false,
             headers: {
+                Cookie: cookie,
+                "X-CSRF-Token": xcsrf,
                 "Content-Type": "application-json"
             },
             body: JSON.stringify(config)
