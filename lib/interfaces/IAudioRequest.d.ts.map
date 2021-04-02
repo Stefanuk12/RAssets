@@ -1,0 +1,1 @@
+{"version":3,"file":"IAudioRequest.d.ts","sourceRoot":"","sources":["../../src/interfaces/IAudioRequest.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,aAAa;IAC1B,IAAI,EAAE,MAAM,CAAA;IACZ,IAAI,EAAE,MAAM,CAAA;IACZ,OAAO,CAAC,EAAE,MAAM,CAAA;IAChB,aAAa,EAAE,MAAM,GAAG,OAAO,CAAA;IAC/B,iBAAiB,CAAC,EAAE,MAAM,CAAA;IAC1B,iBAAiB,CAAC,EAAE,MAAM,CAAA;CAC7B"}
