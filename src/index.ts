@@ -4,6 +4,8 @@ import formdata from "form-data"
 import { IAssetUploadFile, IAssetUploadRequest } from "./interfaces/IAssetUploadRequest";
 import { IAudioRequest } from "./interfaces/IAudioRequest";
 import { IAudioResponse } from "./interfaces/IAudioResponse";
+import { IAudioVerifyRequest } from "./interfaces/IAudioVerifyRequest";
+import { IAudioVerifyResponse } from "./interfaces/IAudioVerifyResponse";
 
 // RAssets namespace
 namespace RAssets {
@@ -139,6 +141,43 @@ namespace RAssets {
 
         // Returning SoundId
         return soundId[1]
+    }
+
+    // Verify if an audio can be uploaded
+    export async function verifyAudio(cookie: string, data: IAudioVerifyRequest){
+        // Config
+        const config = <IAudioVerifyRequest>{
+            file: data.file,
+            paymentSource: data.paymentSource,
+        }
+        if (data.duration) config.duration = data.duration
+        if (data.fileSize) config.fileSize = data.fileSize
+        if (data.groupId) config.groupId = data.groupId
+        if (data.name) config.name = data.name
+
+        // Send request
+        const response = await HttpClient.post("audio/verify", {
+            throwHttpErrors: false,
+            headers: {
+                "Content-Type": "application-json"
+            },
+            body: JSON.stringify(config)
+        })
+
+        // Parse Body
+        const responseBody = JSON.parse(response.body)
+
+        // Check for any errors
+        if (responseBody["errors"]){
+            const error = responseBody["errors"][0]
+            const errorMessage = error["message"]
+
+            if (errorMessage){
+                throw(new Error(errorMessage))
+            }
+        }
+
+        return <IAudioVerifyResponse>responseBody
     }
 }
 

@@ -1,5 +1,7 @@
+import { AssetType } from "../enum/AssetType";
+
 export interface IAssetUploadRequest {
-    assetTypeId: string
+    assetTypeId: AssetType
     isOggUploadEnabled?: "True" | "False"
     groupId?: string
     onVerificationPage?: "True" | "False"

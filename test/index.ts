@@ -1,5 +1,6 @@
 // Dependencies
 import * as fs from "fs"
+import { AssetType } from "../src/enum/AssetType"
 import RAssets from "../src/index"
 
 //
@@ -19,7 +20,7 @@ import RAssets from "../src/index"
     */
 
     // Upload Asset
-    const uploadAsset = await RAssets.upload(cookie, {content: testImage, name: "test", type: "png"}, {mime: "image/png", assetTypeId: "11"})
+    const uploadAsset = await RAssets.upload(cookie, {content: testImage, name: "test", type: "png"}, {mime: "image/png", assetTypeId: AssetType.Image})
     
     // Results
 
