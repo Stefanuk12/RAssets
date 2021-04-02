@@ -1,9 +1,9 @@
 {
   "name": "rassets",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple Typescript wrapper to upload assets.",
   "main": "./lib/index.js",
-  "types": "./lib/index.t.ts",
+  "types": "./lib/index.d.ts",
   "directories": {
     "lib": "lib"
   },
