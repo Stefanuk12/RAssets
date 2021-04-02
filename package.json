@@ -1,7 +1,7 @@
 {
   "name": "rassets",
   "version": "1.0.0",
-  "description": "Have control over when to upload your assets on ROBLOX.",
+  "description": "A simple Typescript wrapper to upload assets.",
   "main": "index.js",
   "directories": {
     "lib": "lib"
