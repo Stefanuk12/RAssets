@@ -1,0 +1,27 @@
+{
+  "name": "rassets",
+  "version": "1.0.0",
+  "description": "Have control over when to upload your assets on ROBLOX.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stefanuk12/RAssets.git"
+  },
+  "keywords": [],
+  "author": "Stefanuk12",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Stefanuk12/RAssets/issues"
+  },
+  "homepage": "https://github.com/Stefanuk12/RAssets#readme",
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "got": "^11.8.2"
+  }
+}
