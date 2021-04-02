@@ -154,11 +154,13 @@ namespace RAssets {
         // Config
         const config = <IAudioVerifyRequest>{
             file: data.file,
+            name: "string",
             paymentSource: data.paymentSource,
+            fileSize: data.file.length
         }
         if (data.duration) config.duration = data.duration
-        if (data.fileSize) config.fileSize = data.fileSize
         if (data.groupId) config.groupId = data.groupId
+        if (data.fileSize) config.fileSize = data.fileSize
         if (data.name) config.name = data.name
 
         // Send request
@@ -167,7 +169,7 @@ namespace RAssets {
             headers: {
                 Cookie: `.ROBLOSECURITY=${cookie};`,
                 "X-CSRF-Token": xcsrf,
-                "Content-Type": "application-json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(config)
         })
