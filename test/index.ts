@@ -18,8 +18,8 @@ import RAssets from "../src/index"
     })
     */
 
-    // Upload Image
-    const uploadImage = await RAssets.upload(cookie, {content: testImage, name: "test", type: "png"}, {mime: "image/png", assetTypeId: "11"})
+    // Upload Asset
+    const uploadAsset = await RAssets.upload(cookie, {content: testImage, name: "test", type: "png"}, {mime: "image/png", assetTypeId: "11"})
     
     // Results
 
