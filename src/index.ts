@@ -165,7 +165,7 @@ namespace RAssets {
         const response = await HttpClient.post("audio/verify", {
             throwHttpErrors: false,
             headers: {
-                Cookie: cookie,
+                Cookie: `.ROBLOSECURITY=${cookie};`,
                 "X-CSRF-Token": xcsrf,
                 "Content-Type": "application-json"
             },
