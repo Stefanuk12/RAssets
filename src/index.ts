@@ -1,8 +1,6 @@
 // Dependencies
 import got from "got"
-import formdata from "form-data"
 import { IAssetUploadFile, IAssetUploadRequest } from "./interfaces/IAssetUploadRequest";
-import { IAssetUploadRequestHidden } from "./interfaces/IAssetUploadRequestHidden";
 import { IAudioRequest } from "./interfaces/IAudioRequest";
 import { IAudioResponse } from "./interfaces/IAudioResponse";
 import { IAudioVerifyRequest } from "./interfaces/IAudioVerifyRequest";
@@ -97,7 +95,7 @@ namespace RAssets {
     }
 
     // Upload an asset - using hidden api :flushed: (ACTUALLY WORKS)
-    export async function upload(cookie: string, file: IAssetUploadFile, data: IAssetUploadRequestHidden){
+    export async function upload(cookie: string, file: IAssetUploadFile, data: IAssetUploadRequest){
         // Get CSRF
         const xcsrf = await RAssets.getCSRF(cookie)
         if (!xcsrf){
