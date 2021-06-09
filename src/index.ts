@@ -1,6 +1,6 @@
 // Dependencies
 import got from "got"
-import { IAssetUploadFile, IAssetUploadRequest } from "./interfaces/IAssetUploadRequest";
+import { IAssetUploadRequest } from "./interfaces/IAssetUploadRequest";
 import { IAudioRequest } from "./interfaces/IAudioRequest";
 import { IAudioResponse } from "./interfaces/IAudioResponse";
 import { IAudioVerifyRequest } from "./interfaces/IAudioVerifyRequest";
@@ -95,7 +95,7 @@ namespace RAssets {
     }
 
     // Upload an asset - using hidden api :flushed: (ACTUALLY WORKS)
-    export async function upload(cookie: string, file: IAssetUploadFile, data: IAssetUploadRequest){
+    export async function upload(cookie: string, data: IAssetUploadRequest){
         // Get CSRF
         const xcsrf = await RAssets.getCSRF(cookie)
         if (!xcsrf){
@@ -109,7 +109,7 @@ namespace RAssets {
                 Cookie: `.ROBLOSECURITY=${cookie};`,
                 "x-csrf-token": xcsrf
             },
-            body: file.content,
+            body: data.file,
             searchParams: {
                 assetid: data.assetid || 0,
                 type: data.assetType,

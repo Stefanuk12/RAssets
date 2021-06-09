@@ -20,7 +20,8 @@ import RAssets from "../src/index"
     */
 
     // Upload Asset
-    const uploadAsset = await RAssets.upload(cookie, {content: testModel, name: "test", type: "rbxm"}, {
+    const uploadAsset = await RAssets.upload(cookie, {
+        file: testModel,
         assetType: "Model",
         name: "test",
         description: "test",
