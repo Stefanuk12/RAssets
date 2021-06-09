@@ -24,7 +24,13 @@ const uploadAudio = await RAssets.uploadAudio(cookie, {
 ```
 
 ## upload
-This function allows you to upload any asset (CURRENTLY BROKEN)
+This function allows you to upload any asset (working) using the "hidden" api endpoint - http://data.roblox.com/Data/Upload.ashx. If you specify an assetid that you own, you may even overwrite that asset
 ```ts
-const uploadAsset = await RAssets.upload(cookie, {content: testImage, name: "test", type: "png"}, {mime: "image/png", assetTypeId: "11"})
+const uploadAsset = await RAssets.upload(cookie, {content: testModel, name: "test", type: "rbxm"}, {
+    assetType: "Model",
+    name: "test",
+    description: "test",
+    ispublic: true,
+    allowcomments: true
+})
 ```

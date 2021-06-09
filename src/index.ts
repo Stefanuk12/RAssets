@@ -96,56 +96,8 @@ namespace RAssets {
         return <IAudioResponse>responseBody
     }
 
-    // Upload an asset - broken have no idea how to fix this
-    export async function upload(cookie: string, file: IAssetUploadFile, data: IAssetUploadRequest){
-        // Get verification token
-        const RequestVerificationToken = await RAssets.getRequestVerificationToken(cookie)
-
-        // Form Data
-        const form = new formdata()
-        form.append("__RequestVerificationToken", RequestVerificationToken)
-        form.append("assetTypeId", data.assetTypeId)
-        form.append("isOggUploadEnabled", data.isOggUploadEnabled || "True")
-        form.append("groupId", data.groupId || "")
-        form.append("onVerificationPage", data.onVerificationPage || "False")
-        form.append("captchaEnabled", data.captchaEnabled || "False")
-        form.append("captchaToken", data.captchaToken || "")
-        form.append("captchaProvider", data.captchaProvider || "")
-        form.append("file", file.content, {
-            filename: `${file.name}.${file.type}`,
-            contentType: data.mime,
-        })
-        form.append("name", file.name)
-
-        // Body
-        const body = form.getBuffer().toString("base64")
-        
-        // Send request
-        const response = await got.post("https://roblox.com/build/upload", {
-            followRedirect: false,
-            headers: {
-                Host: "www.roblox.com",
-                Cookie: `.ROBLOSECURITY=${cookie}; __RequestVerificationToken=${RequestVerificationToken};`,
-                "Content-Length": body.length.toString(),
-                "Content-Type": `multipart/form-data; boundary=${form.getBoundary()}`,
-                "Content-Transfer-Encoding": "base64"
-            },
-            body: body
-        })
-
-        // Getting the redirect URL + SoundId
-        const url = response.body.match(/<a href="(.+?)">here</) || ["Error", "Error"]
-        const soundId = response.body.match(/uploadedId=(.+?)">here</) || ["Error", "Error"]
-        
-        console.log(url[1])
-        console.log(soundId[1])
-
-        // Returning SoundId
-        return soundId[1]
-    }
-
     // Upload an asset - using hidden api :flushed: (ACTUALLY WORKS)
-    export async function uploadHidden(cookie: string, file: IAssetUploadFile, data: IAssetUploadRequestHidden){
+    export async function upload(cookie: string, file: IAssetUploadFile, data: IAssetUploadRequestHidden){
         // Get CSRF
         const xcsrf = await RAssets.getCSRF(cookie)
         if (!xcsrf){
