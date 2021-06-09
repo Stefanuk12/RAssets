@@ -144,20 +144,13 @@ namespace RAssets {
         return soundId[1]
     }
 
-    // Upload an asset - using hidden api :flushed: broken too atm
+    // Upload an asset - using hidden api :flushed: (ACTUALLY WORKS)
     export async function uploadHidden(cookie: string, file: IAssetUploadFile, data: IAssetUploadRequestHidden){
         // Get CSRF
         const xcsrf = await RAssets.getCSRF(cookie)
         if (!xcsrf){
             throw(new Error("Invalid cookie"))
         }
-
-        // Form Data
-        const form = new formdata()
-        form.append("file", file.content, {
-            filename: `${file.name}.${file.type}`,
-            contentType: "image/png",
-        })
 
         // Send request
         const response = await got.post("http://data.roblox.com/Data/Upload.ashx", {
@@ -166,7 +159,7 @@ namespace RAssets {
                 Cookie: `.ROBLOSECURITY=${cookie};`,
                 "x-csrf-token": xcsrf
             },
-            body: form.getBuffer().toString("base64"),
+            body: file.content,
             searchParams: {
                 assetid: data.assetid || 0,
                 type: data.assetType,
