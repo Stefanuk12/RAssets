@@ -144,7 +144,7 @@ namespace RAssets {
         return soundId[1]
     }
 
-    // Upload an asset - using hidden api :flushed:
+    // Upload an asset - using hidden api :flushed: broken too atm
     export async function uploadHidden(cookie: string, file: IAssetUploadFile, data: IAssetUploadRequestHidden){
         // Get CSRF
         const xcsrf = await RAssets.getCSRF(cookie)
