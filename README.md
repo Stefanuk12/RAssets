@@ -27,7 +27,7 @@ const uploadAudio = await RAssets.uploadAudio(cookie, {
 This function allows you to upload any asset (working) using the "hidden" api endpoint - http://data.roblox.com/Data/Upload.ashx. If you specify an assetid that you own, you may even overwrite that asset
 ```ts
 const uploadAsset = await RAssets.upload(cookie, {
-    file: testModel
+    file: testModel,
     assetType: "Model",
     name: "test",
     description: "test",
