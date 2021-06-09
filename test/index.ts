@@ -1,6 +1,5 @@
 // Dependencies
 import * as fs from "fs"
-import { AssetType } from "../src/enum/AssetType"
 import RAssets from "../src/index"
 
 //
@@ -8,6 +7,7 @@ import RAssets from "../src/index"
     // Vars
     const testAudio = fs.readFileSync("./test/test.ogg")
     const testImage = fs.readFileSync("./test/test.png")
+    const testModel = fs.readFileSync("./test/test.rbxm")
     const cookie = ""
 
     // Upload Audio
@@ -20,11 +20,17 @@ import RAssets from "../src/index"
     */
 
     // Upload Asset
-    //const uploadAsset = await RAssets.upload(cookie, {content: testImage, name: "test", type: "png"}, {mime: "image/png", assetTypeId: AssetType.Image})
+    const uploadAsset = await RAssets.uploadHidden(cookie, {content: testModel, name: "test", type: "rbxm"}, {
+        assetType: "Model",
+        name: "test",
+        description: "test",
+        ispublic: true,
+        allowcomments: true
+    })
     
     // Test
-    const verifyAudio = await RAssets.verifyAudio(cookie, {file: testAudio.toString("base64"), paymentSource: "User"})
+    //const verifyAudio = await RAssets.verifyAudio(cookie, {file: testAudio.toString("base64"), paymentSource: "User"})
 
     //
-    console.log(verifyAudio)
+    console.log(uploadAsset)
 })()
