@@ -2,6 +2,7 @@
 import got from "got"
 import formdata from "form-data"
 import { IAssetUploadFile, IAssetUploadRequest } from "./interfaces/IAssetUploadRequest";
+import { IAssetUploadRequestHidden } from "./interfaces/IAssetUploadRequestHidden";
 import { IAudioRequest } from "./interfaces/IAudioRequest";
 import { IAudioResponse } from "./interfaces/IAudioResponse";
 import { IAudioVerifyRequest } from "./interfaces/IAudioVerifyRequest";
@@ -141,6 +142,43 @@ namespace RAssets {
 
         // Returning SoundId
         return soundId[1]
+    }
+
+    // Upload an asset - using hidden api :flushed:
+    export async function uploadHidden(cookie: string, file: IAssetUploadFile, data: IAssetUploadRequestHidden){
+        // Get CSRF
+        const xcsrf = await RAssets.getCSRF(cookie)
+        if (!xcsrf){
+            throw(new Error("Invalid cookie"))
+        }
+
+        // Form Data
+        const form = new formdata()
+        form.append("file", file.content, {
+            filename: `${file.name}.${file.type}`,
+            contentType: "image/png",
+        })
+
+        // Send request
+        const response = await got.post("http://data.roblox.com/Data/Upload.ashx", {
+            headers: {
+                "User-Agent": "Roblox/WinInet",
+                Cookie: `.ROBLOSECURITY=${cookie};`,
+                "x-csrf-token": xcsrf
+            },
+            body: form.getBuffer().toString("base64"),
+            searchParams: {
+                assetid: data.assetid || 0,
+                type: data.assetType,
+                name: data.name,
+                description: data.description,
+                ispublic: data.ispublic,
+                allowcomments: data.allowcomments
+            }
+        })
+
+        //
+        return response.body
     }
 
     // Verify if an audio can be uploaded

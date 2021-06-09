@@ -45,3 +45,4 @@ export enum AssetType {
     EmoteAnimation = "61",
     Video = "62"
 }
+
