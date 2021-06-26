@@ -94,12 +94,21 @@ namespace RAssets {
         return <IAudioResponse>responseBody
     }
 
-    // Upload an asset - using hidden api :flushed: (ACTUALLY WORKS)
+    // Upload an asset - using hidden api :flushed: (ACTUALLY WORKS, broken for some assets :( though )
     export async function upload(cookie: string, data: IAssetUploadRequest){
         // Get CSRF
         const xcsrf = await RAssets.getCSRF(cookie)
         if (!xcsrf){
             throw(new Error("Invalid cookie"))
+        }
+
+        // Check type
+        if (data.assetType == "Audio"){
+            return uploadAudio(cookie, {
+                name: data.name,
+                file: data.file.toString("base64"),
+                paymentSource: "User"
+            })
         }
 
         // Send request
