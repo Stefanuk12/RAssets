@@ -91,7 +91,7 @@ namespace RAssets {
         }
 
         // Return
-        return <IAudioResponse>responseBody
+        return responseBody.Id
     }
 
     // Upload an asset - using hidden api :flushed: (ACTUALLY WORKS, broken for some assets :( though )
