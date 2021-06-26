@@ -60,7 +60,7 @@ namespace RAssets {
     }
 
     // Upload an audio
-    export async function uploadAudio(cookie: string, data: IAudioRequest){
+    export async function uploadAudio(cookie: string, data: IAudioRequest, returnId = false){
         // Get CSRF
         const xcsrf = await RAssets.getCSRF(cookie)
         if (!xcsrf){
@@ -91,7 +91,11 @@ namespace RAssets {
         }
 
         // Return
-        return responseBody.Id
+        if (returnId){
+            return responseBody.Id
+        } else {
+            return <IAudioResponse>responseBody.body
+        }  
     }
 
     // Upload an asset - using hidden api :flushed: (ACTUALLY WORKS, broken for some assets :( though )
@@ -108,7 +112,7 @@ namespace RAssets {
                 name: data.name,
                 file: data.file.toString("base64"),
                 paymentSource: "User"
-            })
+            }, true)
         }
 
         // Send request
